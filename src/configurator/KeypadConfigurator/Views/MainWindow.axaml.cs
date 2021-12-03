@@ -26,7 +26,7 @@ namespace KeypadConfigurator.Views
         
         private void applyButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            var config = getConfigFromLayout();
         }
 
         private void Connect_OnClickButton_Click(object? sender, RoutedEventArgs e)
@@ -60,6 +60,56 @@ namespace KeypadConfigurator.Views
         }
 
         private void resetButton_Click(object? sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private KeypadConfiguration? getConfigFromLayout()
+        {
+            var vidBox = this.Find<TextBox>("VidBox");
+            var pidBox = this.Find<TextBox>("PidBox");
+            var friendlyNameBox = this.Find<TextBox>("FriendlyNameBox");
+
+            var leftPinUpDown = this.Find<NumericUpDown>("LeftPinUpDown");
+            var leftDebounceUpDown = this.Find<NumericUpDown>("LeftDebounceUpDown");
+            var leftKeyBox = this.Find<TextBox>("LeftKeyBox");
+            
+            var rightPinUpDown = this.Find<NumericUpDown>("RightPinUpDown");
+            var rightDebounceUpDown = this.Find<NumericUpDown>("RightDebounceUpDown");
+            var rightKeyBox = this.Find<TextBox>("RightKeyBox");
+
+            KeypadConfiguration? config = null;
+            
+            try
+            {
+                config = new KeypadConfiguration
+                {
+                    Vid = ushort.Parse(vidBox.Text, System.Globalization.NumberStyles.HexNumber),
+                    Pid = ushort.Parse(pidBox.Text, System.Globalization.NumberStyles.HexNumber),
+                    FriendlyName = friendlyNameBox.Text,
+                    LeftKey = new KeyConfiguration
+                    {
+                        Pin = Convert.ToByte(leftPinUpDown.Value),
+                        KeyChar = leftKeyBox.Text[0],
+                        DebounceTime = Convert.ToInt32(leftDebounceUpDown.Value)
+                    },
+                    RightKey = new KeyConfiguration
+                    {
+                        Pin = Convert.ToByte(rightPinUpDown.Value),
+                        KeyChar = rightKeyBox.Text[0],
+                        DebounceTime = Convert.ToInt32(rightDebounceUpDown.Value)
+                    },
+                };
+            }
+            catch (FormatException)
+            {
+                
+            }
+
+            return config;
+        }
+        
+        private void setConfigToLayout(KeypadConfiguration config)
         {
             
         }

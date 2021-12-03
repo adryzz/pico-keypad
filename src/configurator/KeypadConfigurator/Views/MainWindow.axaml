@@ -26,9 +26,9 @@
                 <StackPanel HorizontalAlignment="Center" Spacing="5">
                     <Label HorizontalAlignment="Center">Left key</Label>
                     <Label>Pin</Label>
-                    <NumericUpDown Name="LeftPinUpDown" Minimum="0" Maximum="40"></NumericUpDown>
+                    <NumericUpDown Name="LeftPinUpDown" Minimum="0" Maximum="40" ParsingNumberStyle="Integer"></NumericUpDown>
                     <Label>Debounce time (microseconds)</Label>
-                    <NumericUpDown Name="LeftDebounceUpDown" Minimum="0"></NumericUpDown>
+                    <NumericUpDown Name="LeftDebounceUpDown" Minimum="0" ParsingNumberStyle="Integer"></NumericUpDown>
                     <Label>Key to press</Label>
                     <TextBox Name="LeftKeyBox" MaxLength="1"></TextBox>
                 </StackPanel>
@@ -36,9 +36,9 @@
                 <StackPanel HorizontalAlignment="Center" Spacing="5">
                     <Label HorizontalAlignment="Center">Right key</Label>
                     <Label>Pin</Label>
-                    <NumericUpDown Name="RightPinUpDown" Minimum="0" Maximum="40"></NumericUpDown>
+                    <NumericUpDown Name="RightPinUpDown" Minimum="0" Maximum="40" ParsingNumberStyle="Integer"></NumericUpDown>
                     <Label>Debounce time (microseconds)</Label>
-                    <NumericUpDown Name="RightDebounceUpDown" Minimum="0"></NumericUpDown>
+                    <NumericUpDown Name="RightDebounceUpDown" Minimum="0" ParsingNumberStyle="Integer"></NumericUpDown>
                     <Label>Key to press</Label>
                     <TextBox Name="RightKeyBox" MaxLength="1"></TextBox>
                 </StackPanel>
