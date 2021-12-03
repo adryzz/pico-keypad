@@ -4,6 +4,10 @@ namespace KeypadConfigurator.Data
     {
         HostHandshake,
         ClientHandshake,
+        Ok,
+        Error,
+        ConfigurationRequest,
         Configuration
+        
     }
 }
