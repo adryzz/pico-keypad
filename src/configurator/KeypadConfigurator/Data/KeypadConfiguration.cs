@@ -2,7 +2,7 @@ namespace KeypadConfigurator.Data
 {
     public struct KeypadConfiguration
     {
-        private static readonly KeypadConfiguration Default =
+        public static readonly KeypadConfiguration Default =
             new KeypadConfiguration
             {
                 Vid = 0727,
