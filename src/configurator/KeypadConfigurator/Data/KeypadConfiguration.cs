@@ -2,6 +2,25 @@ namespace KeypadConfigurator.Data
 {
     public struct KeypadConfiguration
     {
+        private static readonly KeypadConfiguration Default =
+            new KeypadConfiguration
+            {
+                Vid = 0727,
+                Pid = 0727,
+                FriendlyName = "pico-pad",
+                LeftKey = new KeyConfiguration
+                {
+                    Pin = 20,
+                    DebounceTime = 1000,
+                    KeyChar = 'z'
+                },
+                RightKey = new KeyConfiguration
+                {
+                    Pin = 21,
+                    DebounceTime = 1000,
+                    KeyChar = 'x'
+                }
+            };
         /// <summary>
         /// The Vendor ID of the keypad.
         /// </summary>

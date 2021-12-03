@@ -7,10 +7,14 @@ namespace KeypadConfigurator.Data
     {
         private static SerialPort? port;
 
+        public static bool Connected => _connected;
+        private static bool _connected = false;
+
         public static void Initialize(string portName)
         {
             port = new SerialPort(portName, 115200);
             port.Open();
+            _connected = true;
         }
 
         public static IPacket Write(IPacket packet)
@@ -38,6 +42,7 @@ namespace KeypadConfigurator.Data
         public static void Close()
         {
             port?.Close();
+            _connected = false;
         }
     }
 }

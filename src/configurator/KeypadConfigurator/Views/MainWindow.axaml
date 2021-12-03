@@ -2,8 +2,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="KeypadConfigurator.Views.MainWindow"
         Title="KeypadConfigurator"
-        Width="500" Height="400">
+        Width="450" Height="500" CanResize="False">
     
-    <Button Name="apply">Apply</Button>
+    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Spacing="5">
+        <Label>Port</Label>
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <ComboBox Name="PortBox"></ComboBox>
+            <Button Name="Connect" Click="Connect_OnClickButton_Click">Connect</Button>
+            <Button Name="Disconnect" Click="Connect_OnClickButton_Click" IsEnabled="False">Disconnect</Button>
+        </StackPanel>
+        
+        <StackPanel Name="PropsPanel" IsEnabled="false" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label>VID</Label>
+            <TextBox Name="VidBox" MaxLength="4"></TextBox>
+            
+            <Label>PID</Label>
+            <TextBox Name="PidBox" MaxLength="4"></TextBox>
+            
+            <Label>Friendly name</Label>
+            <TextBox Name="FriendlyNameBox" MaxLength="255"></TextBox>
+            
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <StackPanel HorizontalAlignment="Center" Spacing="5">
+                    <Label HorizontalAlignment="Center">Left key</Label>
+                    <Label>Pin</Label>
+                    <NumericUpDown Name="LeftPinUpDown" Minimum="0" Maximum="40"></NumericUpDown>
+                    <Label>Debounce time (microseconds)</Label>
+                    <NumericUpDown Name="LeftDebounceUpDown" Minimum="0"></NumericUpDown>
+                    <Label>Key to press</Label>
+                    <TextBox Name="LeftKeyBox" MaxLength="1"></TextBox>
+                </StackPanel>
+                
+                <StackPanel HorizontalAlignment="Center" Spacing="5">
+                    <Label HorizontalAlignment="Center">Right key</Label>
+                    <Label>Pin</Label>
+                    <NumericUpDown Name="RightPinUpDown" Minimum="0" Maximum="40"></NumericUpDown>
+                    <Label>Debounce time (microseconds)</Label>
+                    <NumericUpDown Name="RightDebounceUpDown" Minimum="0"></NumericUpDown>
+                    <Label>Key to press</Label>
+                    <TextBox Name="RightKeyBox" MaxLength="1"></TextBox>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Spacing="5">
+                <Button Name="Apply" Click="applyButton_Click">Apply</Button>
+                <Button Name="Reset" Click="resetButton_Click">Reset to defaults</Button>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+    
 
 </Window>
