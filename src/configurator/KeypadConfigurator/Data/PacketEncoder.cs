@@ -7,7 +7,11 @@ namespace KeypadConfigurator.Data
     {
         public static byte[] Encode(IPacket packet)
         {
-            if (packet.Type == PacketType.HostHandshake)
+            if (packet.Type is PacketType.HostHandshake
+                or PacketType.ClientHandshake
+                or PacketType.Ok
+                or PacketType.Error
+                or PacketType.ConfigurationRequest)
             {
                 return new[] { (byte)packet.Type };
             }
@@ -77,8 +81,20 @@ namespace KeypadConfigurator.Data
             
             PacketType type = (PacketType)packet[0];
 
+            if (type == PacketType.HostHandshake)
+                return new HostHandshakePacket();
+            
             if (type == PacketType.ClientHandshake)
                 return new ClientHandshakePacket();
+
+            if (type == PacketType.Ok)
+                return new OkPacket();
+
+            if (type == PacketType.Error)
+                return new ErrorPacket();
+
+            if (type == PacketType.ConfigurationRequest)
+                return new ConfigurationRequestPacket();
 
             if (type == PacketType.Configuration)
             {
