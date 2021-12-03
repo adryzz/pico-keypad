@@ -74,6 +74,12 @@ namespace KeypadConfigurator.Views
                     propsPanel.IsEnabled = true;
                     disconnectButton.IsEnabled = true;
                     connectButton.IsEnabled = false;
+                    
+                    var response = KeypadConnectionManager.Write(new ConfigurationRequestPacket());
+                    if (response is ConfiguratonPacket p)
+                    {
+                        setConfigToLayout(p.Configuration);
+                    }
                 }
             }
         }
