@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
 namespace KeypadConfigurator.Views
@@ -17,6 +18,11 @@ namespace KeypadConfigurator.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+        
+        public void button_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

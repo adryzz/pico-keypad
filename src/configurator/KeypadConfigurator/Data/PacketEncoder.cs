@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Text;
 
 namespace KeypadConfigurator.Data
@@ -137,6 +138,79 @@ namespace KeypadConfigurator.Data
                 
                 c1.DebounceTime = BitConverter.ToInt32(packet, index);
                 index += sizeof(int);
+
+                config.LeftKey = c0;
+                config.RightKey = c1;
+
+                return new ConfiguratonPacket
+                {
+                    Configuration = config
+                };
+            }
+
+            return null;
+        }
+        
+        public static IPacket Decode(Stream packetStream)
+        {
+            if (!packetStream.CanRead)
+                throw new ArgumentException();
+            
+            PacketType type = (PacketType)packetStream.ReadByte();
+
+            if (type == PacketType.HostHandshake)
+                return new HostHandshakePacket();
+            
+            if (type == PacketType.ClientHandshake)
+                return new ClientHandshakePacket();
+
+            if (type == PacketType.Ok)
+                return new OkPacket();
+
+            if (type == PacketType.Error)
+                return new ErrorPacket();
+
+            if (type == PacketType.ConfigurationRequest)
+                return new ConfigurationRequestPacket();
+
+            if (type == PacketType.Configuration)
+            {
+                int index = 1;
+                KeypadConfiguration config = new KeypadConfiguration();
+
+                byte[] vid = new byte[sizeof(ushort)];
+                packetStream.Read(vid, 0, vid.Length);
+                config.Vid = BitConverter.ToUInt16(vid, 0);
+
+                byte[] pid = new byte[sizeof(ushort)];
+                packetStream.Read(pid, 0, pid.Length);
+                config.Pid = BitConverter.ToUInt16(pid, 0);
+
+                byte[] length = new byte[sizeof(ushort)];
+                packetStream.Read(length, 0, length.Length);
+                ushort friendlyNameLength = BitConverter.ToUInt16(length, 0);
+
+                byte[] name = new byte[friendlyNameLength];
+                packetStream.Read(name, 0, friendlyNameLength);
+                config.FriendlyName = Encoding.ASCII.GetString(name);
+
+                KeyConfiguration c0 = new KeyConfiguration();
+
+                c0.Pin = (byte)packetStream.ReadByte();
+                c0.KeyChar = (char)packetStream.ReadByte();
+
+                byte[] d0 = new byte[sizeof(int)];
+                packetStream.Read(d0, 0, d0.Length);
+                c0.DebounceTime = BitConverter.ToInt32(d0, index);
+
+                KeyConfiguration c1 = new KeyConfiguration();
+                
+                c1.Pin = (byte)packetStream.ReadByte();
+                c1.KeyChar = (char)packetStream.ReadByte();
+                
+                byte[] d1 = new byte[sizeof(int)];
+                packetStream.Read(d1, 0, d1.Length);
+                c0.DebounceTime = BitConverter.ToInt32(d1, index);
 
                 config.LeftKey = c0;
                 config.RightKey = c1;
