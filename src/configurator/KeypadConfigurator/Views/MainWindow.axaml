@@ -14,10 +14,10 @@
         
         <StackPanel Name="PropsPanel" IsEnabled="false" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label>VID</Label>
-            <TextBox Name="VidBox" MaxLength="4"></TextBox>
+            <NumericUpDown Name="VidUpDown" Minimum="0" Maximum="65535" ParsingNumberStyle="AllowHexSpecifier" ShowButtonSpinner="False"></NumericUpDown>
             
             <Label>PID</Label>
-            <TextBox Name="PidBox" MaxLength="4"></TextBox>
+            <NumericUpDown Name="PidUpDown" Minimum="0" Maximum="65535" ParsingNumberStyle="AllowHexSpecifier" ShowButtonSpinner="False"></NumericUpDown>
             
             <Label>Friendly name</Label>
             <TextBox Name="FriendlyNameBox" MaxLength="255"></TextBox>
@@ -26,9 +26,9 @@
                 <StackPanel HorizontalAlignment="Center" Spacing="5">
                     <Label HorizontalAlignment="Center">Left key</Label>
                     <Label>Pin</Label>
-                    <NumericUpDown Name="LeftPinUpDown" Minimum="0" Maximum="40" ParsingNumberStyle="Integer"></NumericUpDown>
+                    <NumericUpDown Name="LeftPinUpDown" Minimum="0" Maximum="40" ParsingNumberStyle="Integer" ShowButtonSpinner="False"></NumericUpDown>
                     <Label>Debounce time (microseconds)</Label>
-                    <NumericUpDown Name="LeftDebounceUpDown" Minimum="0" ParsingNumberStyle="Integer"></NumericUpDown>
+                    <NumericUpDown Name="LeftDebounceUpDown" Minimum="0" ParsingNumberStyle="Integer" ShowButtonSpinner="False"></NumericUpDown>
                     <Label>Key to press</Label>
                     <TextBox Name="LeftKeyBox" MaxLength="1"></TextBox>
                 </StackPanel>
@@ -36,9 +36,9 @@
                 <StackPanel HorizontalAlignment="Center" Spacing="5">
                     <Label HorizontalAlignment="Center">Right key</Label>
                     <Label>Pin</Label>
-                    <NumericUpDown Name="RightPinUpDown" Minimum="0" Maximum="40" ParsingNumberStyle="Integer"></NumericUpDown>
+                    <NumericUpDown Name="RightPinUpDown" Minimum="0" Maximum="40" ParsingNumberStyle="Integer" ShowButtonSpinner="False"></NumericUpDown>
                     <Label>Debounce time (microseconds)</Label>
-                    <NumericUpDown Name="RightDebounceUpDown" Minimum="0" ParsingNumberStyle="Integer"></NumericUpDown>
+                    <NumericUpDown Name="RightDebounceUpDown" Minimum="0" ParsingNumberStyle="Integer" ShowButtonSpinner="False"></NumericUpDown>
                     <Label>Key to press</Label>
                     <TextBox Name="RightKeyBox" MaxLength="1"></TextBox>
                 </StackPanel>

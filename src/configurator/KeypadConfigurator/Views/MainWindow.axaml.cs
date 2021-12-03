@@ -66,8 +66,8 @@ namespace KeypadConfigurator.Views
 
         private KeypadConfiguration? getConfigFromLayout()
         {
-            var vidBox = this.Find<TextBox>("VidBox");
-            var pidBox = this.Find<TextBox>("PidBox");
+            var vidUpDown = this.Find<NumericUpDown>("VidUpDown");
+            var pidUpDown = this.Find<NumericUpDown>("PidUpDown");
             var friendlyNameBox = this.Find<TextBox>("FriendlyNameBox");
 
             var leftPinUpDown = this.Find<NumericUpDown>("LeftPinUpDown");
@@ -84,8 +84,8 @@ namespace KeypadConfigurator.Views
             {
                 config = new KeypadConfiguration
                 {
-                    Vid = ushort.Parse(vidBox.Text, System.Globalization.NumberStyles.HexNumber),
-                    Pid = ushort.Parse(pidBox.Text, System.Globalization.NumberStyles.HexNumber),
+                    Vid = Convert.ToUInt16(vidUpDown.Value),
+                    Pid = Convert.ToUInt16(pidUpDown.Value),
                     FriendlyName = friendlyNameBox.Text,
                     LeftKey = new KeyConfiguration
                     {
@@ -101,7 +101,7 @@ namespace KeypadConfigurator.Views
                     },
                 };
             }
-            catch (FormatException)
+            catch (Exception)
             {
                 
             }
