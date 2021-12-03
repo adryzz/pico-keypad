@@ -22,10 +22,10 @@ namespace KeypadConfigurator.Data
                            + toEncode.Configuration.FriendlyName.Length //friendly name
                            + sizeof(byte) //pin
                            + sizeof(char) //key
-                           + sizeof(double) //debounce time
+                           + sizeof(int) //debounce time
                            + sizeof(byte) //pin
                            + sizeof(char) //key
-                           + sizeof(double); //debounce time
+                           + sizeof(int); //debounce time
 
                 byte[] data = new byte[size];
 
@@ -37,7 +37,7 @@ namespace KeypadConfigurator.Data
                 BitConverter.GetBytes(toEncode.Configuration.Vid).CopyTo(data, index);
                 index += sizeof(ushort);
                 
-                BitConverter.GetBytes(toEncode.Configuration.Vid).CopyTo(data, index);
+                BitConverter.GetBytes(toEncode.Configuration.Pid).CopyTo(data, index);
                 index += sizeof(ushort);
                 
                 BitConverter.GetBytes((ushort)toEncode.Configuration.FriendlyName.Length).CopyTo(data, index);
@@ -53,7 +53,7 @@ namespace KeypadConfigurator.Data
                 index += sizeof(char);
                 
                 BitConverter.GetBytes(toEncode.Configuration.LeftKey.DebounceTime).CopyTo(data, index);
-                index += sizeof(double);
+                index += sizeof(int);
                 
                 data[index] = toEncode.Configuration.RightKey.Pin;
                 index += sizeof(byte);
@@ -62,7 +62,7 @@ namespace KeypadConfigurator.Data
                 index += sizeof(char);
                 
                 BitConverter.GetBytes(toEncode.Configuration.RightKey.DebounceTime).CopyTo(data, index);
-                index += sizeof(double);
+                index += sizeof(int);
 
                 return data;
 
@@ -95,7 +95,7 @@ namespace KeypadConfigurator.Data
                 index += sizeof(ushort);
 
                 byte[] name = new byte[friendlyNameLength];
-                packet.CopyTo(name, index);
+                Array.Copy(packet, index, name, 0, friendlyNameLength);
                 
                 config.FriendlyName = Encoding.ASCII.GetString(name);
                 index += friendlyNameLength;
@@ -108,8 +108,8 @@ namespace KeypadConfigurator.Data
                 c0.KeyChar = (char)packet[index];
                 index += sizeof(char);
                 
-                c0.DebounceTime = BitConverter.ToDouble(packet, index);
-                index += sizeof(double);
+                c0.DebounceTime = BitConverter.ToInt32(packet, index);
+                index += sizeof(int);
                 
                 KeyConfiguration c1 = new KeyConfiguration();
                 
@@ -119,8 +119,8 @@ namespace KeypadConfigurator.Data
                 c1.KeyChar = (char)packet[index];
                 index += sizeof(char);
                 
-                c1.DebounceTime = BitConverter.ToDouble(packet, index);
-                index += sizeof(double);
+                c1.DebounceTime = BitConverter.ToInt32(packet, index);
+                index += sizeof(int);
 
                 config.LeftKey = c0;
                 config.RightKey = c1;

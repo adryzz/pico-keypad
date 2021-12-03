@@ -10,7 +10,7 @@ namespace KeypadConfigurator.Data
             
         public static bool Validate(KeypadConfiguration config)
         {
-            var fails = config.FriendlyName.Length > ushort.MaxValue;
+            var fails = config.FriendlyName.Length > 255;
             
             fails = fails || checkPin(config.LeftKey.Pin);
             fails = fails || checkPin(config.RightKey.Pin);
